@@ -20,34 +20,27 @@ public class WekaFileReader {
 
 	public void readFile(String valid) throws Exception {
 		 bayes(valid, "EquipeX-plus.txt");
-		 //j48(valid, "EquipeX-moins.txt");
+		 j48(valid, "EquipeX-moins.txt");
 	}
 	
-	/*public void j48(String test, String dev, String outputFile) throws Exception{
+	public void j48(String validate, String outputFile) throws Exception{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-			BufferedReader readerDev = new BufferedReader(new FileReader(dev));
-			BufferedReader readerTest = new BufferedReader(new FileReader(test));
-			Instances wekaDataDev = new Instances(readerDev);
-			Instances wekaDataTest = new Instances(readerTest);
-			readerDev.close();
-			readerTest.close();
 			
-			int index = wekaDataDev.numAttributes() - 1;
-			wekaDataDev.setClassIndex(index);
-			wekaDataTest.setClassIndex(index);
-			J48 j48 = new J48();
-			j48.setUnpruned(true);
-			j48.buildClassifier(wekaDataDev);
+			BufferedReader readerValidate = new BufferedReader(new FileReader(validate));
+			Instances wekaDataValidate = new Instances(readerValidate);
+			readerValidate.close();
 			
-			for (int i = 0; i < wekaDataTest.numInstances(); i++) { 
-				double clsLabel = j48.classifyInstance(wekaDataTest.instance(i)); 
+			int index = wekaDataValidate.numAttributes() - 1;
+			wekaDataValidate.setClassIndex(index);
+			
+			for (int i = 0; i < wekaDataValidate.numInstances(); i++) { 
+				double clsLabel = j48Model.classifyInstance(wekaDataValidate.instance(i)); 
 				//System.out.print("ID: " + wekaDataTest.instance(i).value(0)); 
 				//System.out.print(", actual: " + wekaDataTest.classAttribute().value((int) wekaDataTest.instance(i).classValue())); 
 				//System.out.println(", predicted: " + wekaDataTest.classAttribute().value((int) clsLabel));
-				writer.write(wekaDataTest.classAttribute().value((int) clsLabel));	
-				writer.newLine();
-				
+				writer.write(wekaDataValidate.classAttribute().value((int) clsLabel));	
+				writer.newLine();				
 			}
 			writer.flush();
 			writer.close();
@@ -56,7 +49,7 @@ public class WekaFileReader {
 		} catch (IOException e) {
 			System.out.println("Can't extract data");
 		}
-	}*/
+	}
 	
 	public void bayes(String valid, String outputFile) throws Exception{
 		try {
