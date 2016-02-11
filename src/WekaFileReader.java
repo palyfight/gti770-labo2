@@ -65,22 +65,17 @@ public class WekaFileReader {
 			BufferedReader readerValidate = new BufferedReader(new FileReader(valid));
 			Instances wekaDataValidate = new Instances(readerValidate);
 			readerValidate.close();
-			
-			int predictInstance = 57;
-			double value = bayesModel.classifyInstance(wekaDataValidate.instance(predictInstance));
-			String prediction = wekaDataValidate.classAttribute().value((int)value);
-			System.out.println("The predicted value of instance "+
-                    Integer.toString(predictInstance)+
-                    ": "+prediction); 
+
+			int predictInstance = wekaDataValidate.numAttributes() - 1;
+			wekaDataValidate.setClassIndex(predictInstance);
 			
 			for (int i = 0; i < wekaDataValidate.numInstances(); i++) { 
 				double clsLabel = bayesModel.classifyInstance(wekaDataValidate.instance(i)); 
-				/*System.out.print("ID: " + wekaDataTest.instance(i).value(0)); 
-				System.out.print(", actual: " + wekaDataTest.classAttribute().value((int) wekaDataTest.instance(i).classValue())); 
-				System.out.println(", predicted: " + wekaDataTest.classAttribute().value((int) clsLabel));*/
+				/*System.out.print("ID: " + wekaDataValidate.instance(i).value(0)); 
+				System.out.print(", actual: " + wekaDataValidate.classAttribute().value((int) wekaDataValidate.instance(i).classValue())); 
+				System.out.println(", predicted: " + wekaDataValidate.classAttribute().value((int) clsLabel));*/
 				writer.write(wekaDataValidate.classAttribute().value((int) clsLabel));	
-				writer.newLine();
-				
+				writer.newLine();				
 			}
 			writer.flush();
 			writer.close();
