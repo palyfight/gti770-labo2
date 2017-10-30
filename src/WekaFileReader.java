@@ -47,9 +47,9 @@ public class WekaFileReader {
 			
 			for (int i = 0; i < wekaDataValidate.numInstances(); i++) { 
 				double clsLabel = j48Model.classifyInstance(wekaDataValidate.instance(i)); 
-				//System.out.print("ID: " + wekaDataTest.instance(i).value(0)); 
-				//System.out.print(", actual: " + wekaDataTest.classAttribute().value((int) wekaDataTest.instance(i).classValue())); 
-				//System.out.println(", predicted: " + wekaDataTest.classAttribute().value((int) clsLabel));
+				System.out.print("ID: " + wekaDataTest.instance(i).value(0)); 
+				System.out.print(", actual: " + wekaDataTest.classAttribute().value((int) wekaDataTest.instance(i).classValue())); 
+				System.out.println(", predicted: " + wekaDataTest.classAttribute().value((int) clsLabel));
 				writer.write(wekaDataValidate.classAttribute().value((int) clsLabel));	
 				writer.newLine();				
 			}
@@ -81,9 +81,9 @@ public class WekaFileReader {
 			
 			for (int i = 0; i < wekaDataValidate.numInstances(); i++) { 
 				double clsLabel = bayesModel.classifyInstance(wekaDataValidate.instance(i)); 
-				/*System.out.print("ID: " + wekaDataValidate.instance(i).value(0)); 
+				System.out.print("ID: " + wekaDataValidate.instance(i).value(0)); 
 				System.out.print(", actual: " + wekaDataValidate.classAttribute().value((int) wekaDataValidate.instance(i).classValue())); 
-				System.out.println(", predicted: " + wekaDataValidate.classAttribute().value((int) clsLabel));*/
+				System.out.println(", predicted: " + wekaDataValidate.classAttribute().value((int) clsLabel));
 				writer.write(wekaDataValidate.classAttribute().value((int) clsLabel));	
 				writer.newLine();				
 			}
