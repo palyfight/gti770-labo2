@@ -12,6 +12,11 @@ public class WekaFileReader {
 	private Classifier bayesModel;
 	private Classifier j48Model;
 	
+	/*
+	 * Reads the Weka file and creates prediction files based on the Naive Bayes
+	 * algorithm and the J48 Tree algorithm
+	 * valid = Weka file name.
+	 */
 	public WekaFileReader(String valid) throws Exception{
 		
 		bayesModel = (Classifier) weka.core.SerializationHelper.read("bayes.model");
@@ -24,6 +29,12 @@ public class WekaFileReader {
 		 j48(valid, "EquipeX-moins.txt");
 	}
 	
+	/*
+	 * Using the weka methods, it evaluates the read weka file to output prediction based
+	 * on the model used by the j48Model variable
+	 * validate = Weka File name
+	 * outputFile = output file name
+	 */
 	public void j48(String validate, String outputFile) throws Exception{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
@@ -52,7 +63,13 @@ public class WekaFileReader {
 		}
 	}
 	
-	public void bayes(String validate, String outputFile) throws Exception{
+	/*
+	 * Using the weka methods, it evaluates the read weka file to output prediction based
+	 * on the model used by the bayesModel variable
+	 * validate = Weka File name
+	 * outputFile = output file name
+	 */
+  public void bayes(String validate, String outputFile) throws Exception{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 			
