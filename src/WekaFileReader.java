@@ -1,5 +1,6 @@
 import weka.classifiers.Classifier;
 import weka.core.Instances;
+import weka.core.converters.ConverterUtils.DataSource;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -27,8 +28,8 @@ public class WekaFileReader {
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 			
-			BufferedReader readerValidate = new BufferedReader(new FileReader(validate));
-			Instances wekaDataValidate = new Instances(readerValidate);
+			DataSource readerValidate = new DataSource(validate);
+			Instances wekaDataValidate = readerValidate.getDataSet();
 			readerValidate.close();
 			
 			int index = wekaDataValidate.numAttributes() - 1;
@@ -51,12 +52,12 @@ public class WekaFileReader {
 		}
 	}
 	
-	public void bayes(String valid, String outputFile) throws Exception{
+	public void bayes(String validate, String outputFile) throws Exception{
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 			
-			BufferedReader readerValidate = new BufferedReader(new FileReader(valid));
-			Instances wekaDataValidate = new Instances(readerValidate);
+			DataSource readerValidate = new DataSource(validate);
+			Instances wekaDataValidate = readerValidate.getDataSet();
 			readerValidate.close();
 
 			int predictInstance = wekaDataValidate.numAttributes() - 1;
